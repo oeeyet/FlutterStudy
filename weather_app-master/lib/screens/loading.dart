@@ -38,17 +38,22 @@ class _LoadingState extends State<Loading> {
     print(longitude3);
 
     Network network = Network(
-        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude3&lon=$longitude3&appid=$apikey&units=metric');
+        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude3&lon=$longitude3&appid=$apikey&units=metric',
+        'https://api.openweathermap.org/data/2.5/air_pollution?lat=$latitude3&lon=$longitude3&appid=$apikey');
     //최종적으로 getJsond에서 parsing된 데이터를 출력하기 위해 var type의 weatherData 변수에 getJson데이터의 메서드 값을 할당
     // 또한 getJsonData는 Futrue dynamic타입으로 parsingData를 리턴해주고 있으므로 await 키워드가 붙는다.
     var weatherData = await network.getJsonData();
     print(weatherData);
+
+    var airData = await network.getAirData();
+    print(airData);
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       // 페이지 이동 시, WeatherScreen 인스턴스 위젯이 생성될 때 parse(argument)data를 불러와서 여기에 weather데이터를 전달해주면 된다.
       // weatherscreen 인스턴스가 생성될 때마다 필요한 데이터를 로딩에서부터 전달 받을 수 있다.
       return WeatherScreen(
         parseWeatherData: weatherData,
+        parseAirPollution: airData,
       );
     }));
 
