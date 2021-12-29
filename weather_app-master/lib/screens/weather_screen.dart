@@ -27,7 +27,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
     // 기온을 소수점까지 안나오게 만들기 위해 temp 타입을 int로 변환하고 temp를 double tmep2로 바꾸고 2가지 방법이  있다.
     // 첫번째) temp = temp2.toint();로 변환 또는 소수점 반올림 하기 temp = temp2.round();
     double temp2 = weatherData['main']['temp'];
-    temp = temp2.round();
+    temp = temp2.toInt();
     cityName = weatherData['name'];
 
     print(temp);
